@@ -2063,11 +2063,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\testapi\\testapi\\testapi.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\BANK-DANA\\testapi\\testapi.csproj",
       "projectName": "testapi",
-      "projectPath": "C:\\Users\\User\\source\\repos\\testapi\\testapi\\testapi.csproj",
+      "projectPath": "C:\\Users\\User\\Documents\\BANK-DANA\\testapi\\testapi.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\testapi\\testapi\\obj\\",
+      "outputPath": "C:\\Users\\User\\Documents\\BANK-DANA\\testapi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
