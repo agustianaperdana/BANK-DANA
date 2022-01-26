@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using testapi.Models;
 
@@ -11,9 +12,10 @@ using testapi.Models;
 namespace testapi.Migrations
 {
     [DbContext(typeof(ContextNasabah))]
-    partial class ContextNasabahModelSnapshot : ModelSnapshot
+    [Migration("20220125062939_zz")]
+    partial class zz
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

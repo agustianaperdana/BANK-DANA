@@ -2,37 +2,33 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using testapi.Models;
+using testapi.Helpers;
+using RabbitMQ.Client;
 namespace testapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //test git
-    public class NasabahController : ControllerBase
+    public class TestController : ControllerBase
     {
         private readonly ContextNasabah _context;
-        public NasabahController(ContextNasabah context)
+        public TestController(ContextNasabah context)
         {
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<MNasabah>> GetNasabah()
+        public IEnumerable<MTest01> GetTest(Paging paging)
         {
-            return await _context.Nasabahs.ToListAsync();
+            var x = new ConnectionFactory() { HostName = "localhost" };
+            using(var con=x.CreateConnection())
+            using (var c = con.CreateModel()) { }
+                //return FindAll
         }
-
-        //[HttpGet()]
-        //public MNasabah GetNasabah(int id)
-        //{
-        //    return _context.Nasabahs.FirstOrDefault(x=>x.Id==id);
-        //}
-
-        [HttpGet("{id}")]
-        public async Task GetNasabah(int id, MNasabah model)
+        [HttpGet]
+        public async Task<IEnumerable<MTest01>> GetTest(Paging _paging)
         {
-            var result = await _context.Nasabahs.FindAsync(id);
-            result.NoKTP = model.NoKTP;
-            await _context.Nasabahs.ToListAsync();
+            //return await _context.MTests.ToListAsync();
+            return await _context.MTests.ToListAsync();
+                //FindAsync().Skip(_paging.PageNumber-1)* _paging.PageSize).Take(_paging.PageSize).ToListAsync();
         }
 
         [HttpPost]
