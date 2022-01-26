@@ -8,5 +8,6 @@ namespace testapi.Models
         {
         }
         public DbSet<MNasabah> Nasabahs { get; set; }
+        public DbSet<MTest01> test01s { get; set; }
     }
 }

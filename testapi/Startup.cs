@@ -1,4 +1,5 @@
- 
+
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using testapi.helper;
 using testapi.Models;
 namespace testapi
 {
@@ -29,6 +31,26 @@ namespace testapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddMassTransit(x =>
+            {
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+                {
+                    config.Host(new Uri(RabbitMqConsts.RabbitMqRootUri), h =>
+                    {
+                        h.Username(RabbitMqConsts.UserName);
+                        h.Password(RabbitMqConsts.Password);
+                    });
+                }));
+            });
+            services.AddMassTransitHostedService();
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice.Todo.Publisher", Version = "v1" });
+            });
+
+
             services.AddDbContext<ContextNasabah>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddHttpClient();
