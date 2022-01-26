@@ -12,7 +12,7 @@
  Target Server Version : 15002000
  File Encoding         : 65001
 
- Date: 24/01/2022 13:52:02
+ Date: 26/01/2022 07:27:21
 */
 
 
@@ -37,6 +37,12 @@ GO
 -- Records of __EFMigrationsHistory
 -- ----------------------------
 INSERT INTO [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220124040420_test', N'6.0.1')
+GO
+
+INSERT INTO [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220125062615_test2', N'6.0.1')
+GO
+
+INSERT INTO [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220125062939_zz', N'6.0.1')
 GO
 
 
@@ -68,13 +74,40 @@ GO
 SET IDENTITY_INSERT [dbo].[Nasabahs] ON
 GO
 
-INSERT INTO [dbo].[Nasabahs] ([Id], [Nama], [Alamat], [TTL], [Tgl_Lahir], [NoKTP], [NoHP]) VALUES (N'1', N'budi', N'kampung duri', N'jakarta', N'01-08-1980', N'09896767867887', N'09878978768')
-GO
-
-INSERT INTO [dbo].[Nasabahs] ([Id], [Nama], [Alamat], [TTL], [Tgl_Lahir], [NoKTP], [NoHP]) VALUES (N'2', N'string', N'string', N'string', N'string', N'string', N'string')
-GO
-
 SET IDENTITY_INSERT [dbo].[Nasabahs] OFF
+GO
+
+
+-- ----------------------------
+-- Table structure for Test01
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Test01]') AND type IN ('U'))
+	DROP TABLE [dbo].[Test01]
+GO
+
+CREATE TABLE [dbo].[Test01] (
+  [Id] int  IDENTITY(1,1) NOT NULL,
+  [Nama] nvarchar(max) COLLATE SQL_Latin1_General_CP1_CI_AS  NOT NULL,
+  [Status] smallint  NOT NULL,
+  [Created] datetime2(7)  NOT NULL,
+  [Updated] datetime2(7)  NOT NULL
+)
+GO
+
+ALTER TABLE [dbo].[Test01] SET (LOCK_ESCALATION = TABLE)
+GO
+
+
+-- ----------------------------
+-- Records of Test01
+-- ----------------------------
+SET IDENTITY_INSERT [dbo].[Test01] ON
+GO
+
+INSERT INTO [dbo].[Test01] ([Id], [Nama], [Status], [Created], [Updated]) VALUES (N'1', N'jack', N'1', N'2022-01-09 00:00:00.0000000', N'2022-09-02 00:00:00.0000000')
+GO
+
+SET IDENTITY_INSERT [dbo].[Test01] OFF
 GO
 
 
@@ -90,7 +123,7 @@ GO
 -- ----------------------------
 -- Auto increment value for Nasabahs
 -- ----------------------------
-DBCC CHECKIDENT ('[dbo].[Nasabahs]', RESEED, 3)
+DBCC CHECKIDENT ('[dbo].[Nasabahs]', RESEED, 1)
 GO
 
 
@@ -98,6 +131,22 @@ GO
 -- Primary Key structure for table Nasabahs
 -- ----------------------------
 ALTER TABLE [dbo].[Nasabahs] ADD CONSTRAINT [PK_Nasabahs] PRIMARY KEY CLUSTERED ([Id])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+ON [PRIMARY]
+GO
+
+
+-- ----------------------------
+-- Auto increment value for Test01
+-- ----------------------------
+DBCC CHECKIDENT ('[dbo].[Test01]', RESEED, 1)
+GO
+
+
+-- ----------------------------
+-- Primary Key structure for table Test01
+-- ----------------------------
+ALTER TABLE [dbo].[Test01] ADD CONSTRAINT [PK_Test01] PRIMARY KEY CLUSTERED ([Id])
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
 ON [PRIMARY]
 GO
